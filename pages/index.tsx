@@ -11,7 +11,7 @@ const Home: NextPage = () => {
       </Head>
 
       <main>
-        <h1>Welcome to Jimmer</h1>
+        <h1>Feed</h1>
       </main>
     </div>
   );
