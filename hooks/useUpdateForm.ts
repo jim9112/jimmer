@@ -1,0 +1,14 @@
+import React, { useState } from 'react';
+
+const useUpdateForm = () => {
+  const [formData, setFormData] = useState<any>({});
+  const updateForm = (e: React.ChangeEvent) => {
+    const result = e.target as HTMLInputElement;
+    setFormData({ ...formData, [result.name]: result.value });
+    console.log(formData);
+  };
+
+  return [updateForm, formData];
+};
+
+export default useUpdateForm;
