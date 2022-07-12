@@ -1,7 +1,21 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
+import { onAuthStateChanged } from 'firebase/auth';
+import { auth } from '../firebaseIndex';
 
 const Home: NextPage = () => {
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      // User is signed in, see docs for a list of available properties
+      // https://firebase.google.com/docs/reference/js/firebase.User
+      const uid = user.uid;
+      console.log(uid);
+      // ...
+    } else {
+      // User is signed out
+      // ...
+    }
+  });
   return (
     <div>
       <Head>
