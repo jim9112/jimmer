@@ -1,16 +1,30 @@
-import { initializeApp } from 'firebase/app';
+import { initializeApp, getApps, getApp } from 'firebase/app';
 import { getAnalytics } from 'firebase/analytics';
+import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
 
 const firebaseConfig = {
-  apiKey: process.env.Api_Key,
-  authDomain: process.env.Auth_Domain,
-  projectId: process.env.Project_Id,
-  storageBucket: process.env.Storage_Bucket,
-  messagingSenderId: process.env.Messaging_Sender_Id,
-  appId: process.env.App_Id,
-  measurementId: process.env.Measurement_Id,
+  apiKey: process.env.NEXT_PUBLIC_API_KEY,
+  authDomain: process.env.NEXT_PUBLIC_AUTH_DOMAIN,
+  projectId: process.env.NEXT_PUBLIC_PROJECT_ID,
+  storageBucket: process.env.NEXT_PUBLIC_STORAGE_BUCKET,
+  messagingSenderId: process.env.NEXT_PUBLIC_MESSAGIN_SENDER_ID,
+  appId: process.env.NEXT_PUBLIC_APP_ID,
 };
 
 // Initialize Firebase
-export const app = initializeApp(firebaseConfig);
-export const analytics = getAnalytics(app);
+getApps().length === 0 ? initializeApp(firebaseConfig) : getApp();
+export const auth = getAuth();
+export const createWithEmail = (auth: any, email: any, password: any) => {
+  createUserWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+      // Signed in
+      const user = userCredential.user;
+      // ...
+    })
+    .catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      // ..
+    });
+};
+// export const analytics = getAnalytics(app);

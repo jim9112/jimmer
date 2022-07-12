@@ -1,10 +1,13 @@
 import useUpdateForm from '../hooks/useUpdateForm';
-
+import { auth, createWithEmail } from '../firebaseIndex';
 const SignupForm = () => {
   const [updateForm, formData] = useUpdateForm();
   const formSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log(formData);
+    if (formData.password === formData.password2) {
+      createWithEmail(auth, formData.email, formData.password);
+      console.log(formData);
+    }
   };
   return (
     <div>
