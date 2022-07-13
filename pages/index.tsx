@@ -15,8 +15,6 @@ const Home: NextPage = () => {
       // ...
     } else {
       // User is signed out
-      // ...
-      console.log('no user');
       router.push('/login');
     }
   });
