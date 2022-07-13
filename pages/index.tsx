@@ -1,21 +1,37 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
-import { onAuthStateChanged } from 'firebase/auth';
+import { onAuthStateChanged, signOut } from 'firebase/auth';
 import { auth } from '../firebaseIndex';
+import { useRouter } from 'next/router';
 
 const Home: NextPage = () => {
+  const router = useRouter();
+  // check if user is logged in
   onAuthStateChanged(auth, (user) => {
     if (user) {
-      // User is signed in, see docs for a list of available properties
-      // https://firebase.google.com/docs/reference/js/firebase.User
+      // user is signed in
       const uid = user.uid;
       console.log(uid);
       // ...
     } else {
       // User is signed out
       // ...
+      console.log('no user');
+      router.push('/login');
     }
   });
+
+  // log out user
+  const logOut = () => {
+    signOut(auth)
+      .then(() => {
+        // Sign-out successful.
+      })
+      .catch((error) => {
+        // An error happened.
+        console.log(error);
+      });
+  };
   return (
     <div>
       <Head>
@@ -26,6 +42,9 @@ const Home: NextPage = () => {
 
       <main>
         <h1>Feed</h1>
+        <button type='button' onClick={logOut}>
+          Log Out
+        </button>
       </main>
     </div>
   );

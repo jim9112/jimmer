@@ -2,8 +2,10 @@ import React from 'react';
 import useUpdateForm from '../hooks/useUpdateForm';
 import { auth } from '../firebaseIndex';
 import { signInWithEmailAndPassword } from 'firebase/auth';
+import { useRouter } from 'next/router';
 
 const LoginForm = () => {
+  const router = useRouter();
   const [updateForm, formData] = useUpdateForm();
   const handleForm = (e: React.FormEvent) => {
     e.preventDefault();
@@ -11,6 +13,9 @@ const LoginForm = () => {
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
+        console.log(user);
+        // go to feed after login
+        router.push('/');
         // ...
       })
       .catch((error) => {
