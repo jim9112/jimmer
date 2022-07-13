@@ -7,6 +7,7 @@ import { useRouter } from 'next/router';
 const LoginForm = () => {
   const router = useRouter();
   const [updateForm, formData] = useUpdateForm();
+  // form submit
   const handleForm = (e: React.FormEvent) => {
     e.preventDefault();
     signInWithEmailAndPassword(auth, formData.email, formData.password)
@@ -21,6 +22,7 @@ const LoginForm = () => {
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
+        console.log(errorMessage);
       });
     console.log(formData);
   };
