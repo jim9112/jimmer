@@ -4,7 +4,11 @@ import { auth } from '../firebaseIndex';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { useRouter } from 'next/router';
 
-const LoginForm = () => {
+interface IProps {
+  setDisplayMode: any;
+}
+
+const LoginForm = ({ setDisplayMode }: IProps) => {
   const router = useRouter();
   const [updateForm, formData] = useUpdateForm();
   // form submit
@@ -27,23 +31,29 @@ const LoginForm = () => {
     console.log(formData);
   };
   return (
-    <form action='' onSubmit={handleForm}>
-      <input
-        type='email'
-        name='email'
-        placeholder='email'
-        required
-        onChange={updateForm}
-      />
-      <input
-        type='password'
-        name='password'
-        placeholder='password'
-        required
-        onChange={updateForm}
-      />
-      <input type='submit' value='Login' />
-    </form>
+    <div>
+      <form action='' onSubmit={handleForm}>
+        <input
+          type='email'
+          name='email'
+          placeholder='email'
+          required
+          onChange={updateForm}
+        />
+        <input
+          type='password'
+          name='password'
+          placeholder='password'
+          required
+          onChange={updateForm}
+        />
+        <input type='submit' value='Login' />
+      </form>
+      <h5>
+        Need an Account?{' '}
+        <span onClick={() => setDisplayMode('signUp')}>Click Here</span>{' '}
+      </h5>
+    </div>
   );
 };
 

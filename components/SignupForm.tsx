@@ -1,11 +1,17 @@
 import useUpdateForm from '../hooks/useUpdateForm';
 import { auth, createWithEmail } from '../firebaseIndex';
-const SignupForm = () => {
+
+interface IProps {
+  setDisplayMode: any;
+}
+
+const SignupForm = ({ setDisplayMode }: IProps) => {
   const [updateForm, formData] = useUpdateForm();
   const formSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (formData.password === formData.password2) {
       createWithEmail(auth, formData.email, formData.password);
+      setDisplayMode('accountDetails');
       console.log(formData);
     }
   };
@@ -36,6 +42,10 @@ const SignupForm = () => {
         />
         <input type='submit' value='Submit' />
       </form>
+      <h5>
+        Already Have an Account?{' '}
+        <span onClick={() => setDisplayMode('signIn')}>Click Here</span>{' '}
+      </h5>
     </div>
   );
 };

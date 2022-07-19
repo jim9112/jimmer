@@ -11,8 +11,12 @@ const Login = () => {
   return (
     <main>
       <h1>Happening now</h1>
-      {displayMode === 'signUp' && <SignupForm />}
-      {displayMode === 'signIn' && <LoginForm />}
+      {displayMode === 'signUp' && (
+        <SignupForm setDisplayMode={setDisplayMode} />
+      )}
+      {displayMode === 'signIn' && (
+        <LoginForm setDisplayMode={setDisplayMode} />
+      )}
       {displayMode === 'accountDetails' && <NewAccount />}
     </main>
   );
