@@ -5,7 +5,6 @@ const useUpdateForm = () => {
   const updateForm = (e: React.ChangeEvent) => {
     const result = e.target as HTMLInputElement;
     setFormData({ ...formData, [result.name]: result.value });
-    console.log(formData);
   };
 
   return [updateForm, formData];
