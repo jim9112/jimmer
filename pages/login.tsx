@@ -17,7 +17,8 @@ const Login = () => {
       {displayMode === 'signIn' && (
         <LoginForm setDisplayMode={setDisplayMode} />
       )}
-      {displayMode === 'accountDetails' && <NewAccount />}
+      {/* {displayMode === 'accountDetails' && <NewAccount />} */}
+      <NewAccount />
     </main>
   );
 };

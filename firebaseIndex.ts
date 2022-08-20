@@ -1,6 +1,7 @@
 import { initializeApp, getApps, getApp } from 'firebase/app';
 import { getAnalytics } from 'firebase/analytics';
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
+import { getFirestore } from 'firebase/firestore';
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_API_KEY,
@@ -27,4 +28,6 @@ export const createWithEmail = (auth: any, email: any, password: any) => {
       // ..
     });
 };
+export const db = getFirestore();
+console.log(db);
 // export const analytics = getAnalytics(app);

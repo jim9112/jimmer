@@ -1,10 +1,24 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import { onAuthStateChanged, signOut } from 'firebase/auth';
-import { auth } from '../firebaseIndex';
+import { auth, db } from '../firebaseIndex';
 import { useRouter } from 'next/router';
+import { collection, doc, setDoc, getDoc } from 'firebase/firestore';
 
 const Home: NextPage = () => {
+  const usersRef = collection(db, 'users');
+
+  // check if user profile exists
+  const getUserData = async (uid: string) => {
+    var docRef = doc(db, 'users', uid);
+    var userDoc = await getDoc(docRef);
+    if (userDoc.exists()) {
+      console.log('the record exsists');
+    } else {
+      console.log('the record does not exsist');
+    }
+  };
+
   const router = useRouter();
   // check if user is logged in
   onAuthStateChanged(auth, (user) => {
@@ -12,6 +26,7 @@ const Home: NextPage = () => {
       // user is signed in
       const uid = user.uid;
       console.log(uid);
+      getUserData(uid);
       // ...
     } else {
       // User is signed out
