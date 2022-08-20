@@ -4,8 +4,12 @@ import { onAuthStateChanged, signOut } from 'firebase/auth';
 import { auth, db } from '../firebaseIndex';
 import { useRouter } from 'next/router';
 import { collection, doc, setDoc, getDoc } from 'firebase/firestore';
+import NewAccount from '../components/NewAccount';
+import { useState } from 'react';
 
 const Home: NextPage = () => {
+  const [showAccount, setShowAcount] = useState(false);
+  const [currentUid, setCurrentUid] = useState('');
   const usersRef = collection(db, 'users');
 
   // check if user profile exists
@@ -16,6 +20,7 @@ const Home: NextPage = () => {
       console.log('the record exsists');
     } else {
       console.log('the record does not exsist');
+      setShowAcount(true);
     }
   };
 
@@ -25,7 +30,8 @@ const Home: NextPage = () => {
     if (user) {
       // user is signed in
       const uid = user.uid;
-      console.log(uid);
+      setCurrentUid(user.uid);
+      // console.log(currentUid);
       getUserData(uid);
       // ...
     } else {
@@ -58,6 +64,7 @@ const Home: NextPage = () => {
         <button type='button' onClick={logOut}>
           Log Out
         </button>
+        {showAccount && <NewAccount uid={currentUid} />}
       </main>
     </div>
   );

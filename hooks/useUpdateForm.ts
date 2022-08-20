@@ -7,7 +7,7 @@ const useUpdateForm = () => {
     setFormData({ ...formData, [result.name]: result.value });
   };
 
-  return [updateForm, formData];
+  return [updateForm, formData, setFormData];
 };
 
 export default useUpdateForm;

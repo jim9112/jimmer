@@ -1,11 +1,25 @@
 import useUpdateForm from '../hooks/useUpdateForm';
+import { collection, doc, setDoc, getDoc } from 'firebase/firestore';
+import { auth, db } from '../firebaseIndex';
 
-const NewAccount = () => {
+interface IProps {
+  uid: string;
+}
+
+const NewAccount = ({ uid }: IProps) => {
   const [updateForm, formData] = useUpdateForm();
-
+  console.log(uid);
+  const buildUserProfile = async () => {
+    await setDoc(doc(db, 'users', uid), {
+      userName: formData.username,
+      firstName: formData.firstName,
+      lastName: formData.lastName,
+    });
+    console.log(formData.username);
+  };
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log(formData);
+    buildUserProfile();
   };
 
   return (

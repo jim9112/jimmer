@@ -29,5 +29,4 @@ export const createWithEmail = (auth: any, email: any, password: any) => {
     });
 };
 export const db = getFirestore();
-console.log(db);
 // export const analytics = getAnalytics(app);
