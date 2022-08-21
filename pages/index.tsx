@@ -1,16 +1,18 @@
+import { useState } from 'react';
 import type { NextPage } from 'next';
 import Head from 'next/head';
-import { onAuthStateChanged, signOut } from 'firebase/auth';
+// Firebase Imports
+import { onAuthStateChanged } from 'firebase/auth';
 import { auth, db } from '../firebaseIndex';
 import { useRouter } from 'next/router';
 import { collection, doc, setDoc, getDoc } from 'firebase/firestore';
+// Component Imports
 import NewAccount from '../components/NewAccount';
-import { useState } from 'react';
+import HomeMenu from '../components/HomeMenu';
 
 const Home: NextPage = () => {
   const [showAccount, setShowAcount] = useState(false);
   const [currentUid, setCurrentUid] = useState('');
-  const usersRef = collection(db, 'users');
 
   // check if user profile exists
   const getUserData = async (uid: string) => {
@@ -31,26 +33,13 @@ const Home: NextPage = () => {
       // user is signed in
       const uid = user.uid;
       setCurrentUid(user.uid);
-      // console.log(currentUid);
       getUserData(uid);
-      // ...
     } else {
       // User is signed out
       router.push('/login');
     }
   });
 
-  // log out user
-  const logOut = () => {
-    signOut(auth)
-      .then(() => {
-        // Sign-out successful.
-      })
-      .catch((error) => {
-        // An error happened.
-        console.log(error);
-      });
-  };
   return (
     <div>
       <Head>
@@ -59,11 +48,11 @@ const Home: NextPage = () => {
         <link rel='icon' href='/favicon.ico' />
       </Head>
 
-      <main>
-        <h1>Feed</h1>
-        <button type='button' onClick={logOut}>
-          Log Out
-        </button>
+      <main className='bg-slate-800 text-white min-h-screen flex'>
+        <HomeMenu />
+        <div>
+          <h1>Feed</h1>
+        </div>
         {showAccount && <NewAccount uid={currentUid} />}
       </main>
     </div>

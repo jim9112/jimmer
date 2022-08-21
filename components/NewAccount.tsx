@@ -8,15 +8,17 @@ interface IProps {
 
 const NewAccount = ({ uid }: IProps) => {
   const [updateForm, formData] = useUpdateForm();
-  console.log(uid);
+
+  // Write user info to the database
   const buildUserProfile = async () => {
     await setDoc(doc(db, 'users', uid), {
       userName: formData.username,
       firstName: formData.firstName,
       lastName: formData.lastName,
     });
-    console.log(formData.username);
   };
+
+  // handle the form submit
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     buildUserProfile();
