@@ -52,6 +52,16 @@ const Home: NextPage = () => {
         <HomeMenu />
         <div>
           <h1>Feed</h1>
+          <form>
+            <textarea
+              className='resize-none'
+              name='newPost'
+              id='newPost'
+              cols={30}
+              rows={4}
+              placeholder='Whats Happening?'
+            ></textarea>
+          </form>
         </div>
         {showAccount && <NewAccount uid={currentUid} />}
       </main>
