@@ -15,7 +15,7 @@ const HomeMenu = () => {
   };
 
   return (
-    <div>
+    <div className='px-7 border-r-2'>
       <nav>
         <ul className='flex flex-col'>
           <li>Home</li>

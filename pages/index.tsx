@@ -54,7 +54,7 @@ const Home: NextPage = () => {
           <h1>Feed</h1>
           <form>
             <textarea
-              className='resize-none'
+              className='resize-none text-black'
               name='newPost'
               id='newPost'
               cols={30}
